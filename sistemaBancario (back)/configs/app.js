@@ -12,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 3500;
 
 // Routes
+const favoriteRoutes = require('../src/favorites/favorites.routes');
 
 //CONFIGURAR EL SERVIDOR HTTP DE EXPRESS
 app.use(express.urlencoded({ extended: false }));
@@ -21,7 +22,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // Ruta
-
+app.use('/favorite', favoriteRoutes);
 
 //Función donde se levanta el servidor
 exports.initServer = () => {
