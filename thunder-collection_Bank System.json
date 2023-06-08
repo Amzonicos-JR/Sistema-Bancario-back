@@ -1,0 +1,128 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Bank System",
+    "dateExported": "2023-06-08T04:38:39.186Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "ServicesBank",
+            "containerId": "",
+            "created": "2023-06-08T04:38:30.207Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "c779c8cc-308a-4ea3-806b-2637fe0f432f",
+            "colId": "ddb4d1f9-aea5-40c3-8965-f5554ec49bc9",
+            "containerId": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "add",
+            "url": "/serviceBank/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-08T04:32:30.028Z",
+            "modified": "2023-06-08T04:38:32.337Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lustrado de zapatos"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Zapatos de todo tipo (formales)"
+                    },
+                    {
+                        "name": "price",
+                        "value": "60"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "16090794-985c-430f-8490-9e829c365869",
+            "colId": "ddb4d1f9-aea5-40c3-8965-f5554ec49bc9",
+            "containerId": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "getAll",
+            "url": "/serviceBank/get",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-06-08T04:35:23.828Z",
+            "modified": "2023-06-08T04:38:33.214Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "791ab9f9-ffa5-4a34-8623-dcb221f58c38",
+            "colId": "ddb4d1f9-aea5-40c3-8965-f5554ec49bc9",
+            "containerId": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "get",
+            "url": "/serviceBank/get/64815ab4f11bd65885a57190",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-06-08T04:36:19.264Z",
+            "modified": "2023-06-08T04:38:33.882Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5edf9555-8ce8-4e19-b9bd-e33903e2d3e6",
+            "colId": "ddb4d1f9-aea5-40c3-8965-f5554ec49bc9",
+            "containerId": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "update",
+            "url": "/serviceBank/update/64815ab4f11bd65885a57190",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-06-08T04:36:49.748Z",
+            "modified": "2023-06-08T04:38:34.425Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lavado de carro"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Impresionante carwash"
+                    },
+                    {
+                        "name": "price",
+                        "value": "200"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "98e5a303-dbb4-4d36-86f7-b190b757c68d",
+            "colId": "ddb4d1f9-aea5-40c3-8965-f5554ec49bc9",
+            "containerId": "1c966216-e246-40d0-8d02-11a7bc6854b4",
+            "name": "delete",
+            "url": "/serviceBank/delete/64815ab4f11bd65885a57190",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-06-08T04:37:59.681Z",
+            "modified": "2023-06-08T04:38:35.248Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:3000"
+        }
+    }
+}
