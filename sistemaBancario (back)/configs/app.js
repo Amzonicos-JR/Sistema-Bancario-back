@@ -10,9 +10,10 @@ const cors = require('cors');
 //Instancia de express
 const app = express();
 const port = process.env.PORT || 3500;
-const userRoutes = require('../src/user/user.routes')
 
 // Routes
+const userRoutes = require('../src/user/user.routes')
+const transferRoutes = require('../src/transfer/transfer.routes')
 
 //CONFIGURAR EL SERVIDOR HTTP DE EXPRESS
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +24,7 @@ app.use(morgan('dev'));
 
 // Ruta
 app.use('/user', userRoutes);
+app.use('/transfer', transferRoutes)
 
 //Función donde se levanta el servidor
 exports.initServer = () => {
