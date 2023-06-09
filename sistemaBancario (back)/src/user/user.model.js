@@ -15,18 +15,18 @@ const userSchema = mongoose.Schema({
         required: true,
         lowercase: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    noCuenta:{
+    noCuenta: {
         type: String
     },
     email: {
         type: String,
         required: true
     },
-    DPI:{
+    DPI: {
         type: String,
         required: true
     },
@@ -37,10 +37,10 @@ const userSchema = mongoose.Schema({
     ingresosMensuales: {
         type: String
     },
-    balance:{
-        type: String
+    balance: {
+        type: Number
     },
-    movimientos:{
+    movimientos: {
         type: String
     },
     role: {
@@ -48,6 +48,8 @@ const userSchema = mongoose.Schema({
         required: true,
         uppercase: true
     }
+}, {
+    versionKey: false
 });
 
 module.exports = mongoose.model('User', userSchema);
