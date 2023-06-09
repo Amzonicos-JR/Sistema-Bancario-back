@@ -1,0 +1,150 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Sistema Bancario",
+    "dateExported": "2023-06-01T05:28:12.857Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "favorite",
+            "containerId": "",
+            "created": "2023-06-01T05:17:10.225Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "5d56084e-3677-4509-8980-1263572cbe22",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Test-Favorite",
+            "url": "/favorite/test",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-06-01T05:17:27.386Z",
+            "modified": "2023-06-01T05:19:09.191Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "69b7a793-037e-4763-99f9-b1bcfc6264ad",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Add-Favorite",
+            "url": "/favorite/add",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-06-01T05:17:38.153Z",
+            "modified": "2023-06-01T05:22:28.858Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "apodo",
+                        "value": "Pepe"
+                    },
+                    {
+                        "name": "noCuenta",
+                        "value": "2001"
+                    },
+                    {
+                        "name": "DPI",
+                        "value": "13467925"
+                    },
+                    {
+                        "name": "idNoCuenta",
+                        "value": "1001"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "fd456d39-7f86-440b-b876-8546bcc0bbd8",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Get-Favorite",
+            "url": "/favorite/get",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-06-01T05:17:54.425Z",
+            "modified": "2023-06-01T05:22:45.466Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3b55adb8-682a-49ae-ab46-c78ccc91d0a2",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Get ID-Favorite",
+            "url": "/favorite/get/64782b147e8bf8c75880e55b",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-06-01T05:18:10.531Z",
+            "modified": "2023-06-01T05:23:07.597Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f593a31d-148f-47a5-a1af-0be06b15acdd",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Update-Favorite",
+            "url": "/favorite/update/64782b147e8bf8c75880e55b",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-06-01T05:18:22.345Z",
+            "modified": "2023-06-01T05:25:02.110Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "apodo",
+                        "value": "Cambio"
+                    },
+                    {
+                        "name": "noCuenta",
+                        "value": "2002"
+                    },
+                    {
+                        "name": "DPI",
+                        "value": "13467928"
+                    },
+                    {
+                        "name": "idNoCuenta",
+                        "value": "1002"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "d03ff81b-2415-4f37-af97-90ebc32b7edc",
+            "colId": "996e773b-46c8-4b8f-8c25-26ff2980e18e",
+            "containerId": "8a53b9b5-f539-40ff-9dff-0f26c18dd573",
+            "name": "Delete-Favorite",
+            "url": "/favorite/delete/64782b147e8bf8c75880e55b",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-06-01T05:18:35.657Z",
+            "modified": "2023-06-01T05:25:27.705Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:3000"
+        }
+    }
+}

@@ -14,6 +14,7 @@ const port = process.env.PORT || 3500;
 // Routes
 const userRoutes = require('../src/user/user.routes')
 const transferRoutes = require('../src/transfer/transfer.routes')
+const favoriteRoutes = require('../src/favorites/favorites.routes');
 
 //CONFIGURAR EL SERVIDOR HTTP DE EXPRESS
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +26,7 @@ app.use(morgan('dev'));
 // Ruta
 app.use('/user', userRoutes);
 app.use('/transfer', transferRoutes)
+app.use('/favorite', favoriteRoutes);
 
 //Función donde se levanta el servidor
 exports.initServer = () => {
