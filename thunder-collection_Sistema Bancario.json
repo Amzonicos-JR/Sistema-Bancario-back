@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Sistema Bancario",
-    "dateExported": "2023-06-09T08:17:44.910Z",
+    "dateExported": "2023-06-09T15:56:46.551Z",
     "version": "1.1",
     "folders": [
         {
@@ -24,6 +24,13 @@
             "containerId": "",
             "created": "2023-06-09T08:00:40.952Z",
             "sortNum": 30000
+        },
+        {
+            "_id": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "ServicesBank",
+            "containerId": "",
+            "created": "2023-06-09T15:55:59.453Z",
+            "sortNum": 40000
         }
     ],
     "requests": [
@@ -53,6 +60,38 @@
             "modified": "2023-06-09T08:00:40.952Z",
             "headers": [],
             "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a8246102-aa82-4b75-a023-d6f5aae5dafc",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "add",
+            "url": "/serviceBank/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-09T15:55:59.453Z",
+            "modified": "2023-06-09T15:55:59.453Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lustrado de zapatos"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Zapatos de todo tipo (formales)"
+                    },
+                    {
+                        "name": "price",
+                        "value": "60"
+                    }
+                ]
+            },
             "tests": []
         },
         {
@@ -162,6 +201,20 @@
             "tests": []
         },
         {
+            "_id": "a92ff367-84ac-4432-9882-868eecdfd8fa",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "getAll",
+            "url": "/serviceBank/get",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-06-09T15:55:59.454Z",
+            "modified": "2023-06-09T15:55:59.454Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
             "_id": "fcb91417-3d77-49d5-aafd-f180e8ce4149",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
             "containerId": "95a83d96-8a5c-4e28-b878-d7abf7007ddf",
@@ -199,6 +252,20 @@
             "sortNum": 30000,
             "created": "2023-06-09T08:00:40.954Z",
             "modified": "2023-06-09T08:00:40.954Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "bfbf6fee-c69c-4dd4-a929-907e62e04241",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "get",
+            "url": "/serviceBank/get/64815ab4f11bd65885a57190",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-06-09T15:55:59.455Z",
+            "modified": "2023-06-09T15:55:59.455Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -255,6 +322,38 @@
             "tests": []
         },
         {
+            "_id": "e58ddc68-7af8-460a-883e-0e0f1b3245da",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "update",
+            "url": "/serviceBank/update/64815ab4f11bd65885a57190",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-06-09T15:55:59.456Z",
+            "modified": "2023-06-09T15:55:59.456Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lavado de carro"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Impresionante carwash"
+                    },
+                    {
+                        "name": "price",
+                        "value": "200"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
             "_id": "ebaea7b5-667c-4d8f-871c-77e364c34764",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
             "containerId": "79b8f9dd-f360-49bc-8556-de4c7aa8f02d",
@@ -307,6 +406,20 @@
                     }
                 ]
             },
+            "tests": []
+        },
+        {
+            "_id": "4be7c872-471d-4f3a-8c5f-094e2dfb4dad",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "delete",
+            "url": "/serviceBank/delete/64815ab4f11bd65885a57190",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-06-09T15:55:59.457Z",
+            "modified": "2023-06-09T15:55:59.457Z",
+            "headers": [],
+            "params": [],
             "tests": []
         },
         {
