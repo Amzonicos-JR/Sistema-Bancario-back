@@ -36,6 +36,17 @@ exports.newTransfer = async (req, res) => {
             second: '2-digit'
         }).replace('.', ','); //Formato de fecha formateado a las convecciones del navegador(Español)
         // Validar que no pueda transferir mas de (Q 10,000) por dia
+        let amount = data.amount;
+        let amountF = 0;
+        amountF = parseInt(amount);
+        let transfersFound = await Transfer.find({ status: 1 }, { DPIO: data.DPIO }, { date: data.date }).select('amount');
+        // Recorrer las transferencias encontradas y sumar los amount
+        let sum = 0;
+        for (let i = 0; i < transfersFound.length; i++) {
+            sum += transfersFound[i].amount;
+        };
+        if (sum + amountF == 10000) return res.send({ message: 'You cannot transfer more than Q10,000 per day.' })
+        console.log(sum + amountF, 'Monto de transferencias por hoy / Paso')
         // Crear la instancia 
         let transfer = new Transfer(data);
         await transfer.save();
@@ -121,7 +132,7 @@ exports.getTransfers = async (req, res) => {
     try {
         let transfers = await Transfer.find();
         if (!transfers) return res.status(404).send({ message: 'Transfers not found' });
-        return res.send({ message: 'Transfers found', transfers});
+        return res.send({ message: 'Transfers found', transfers });
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Error not found' });
@@ -132,10 +143,10 @@ exports.getTransfers = async (req, res) => {
 exports.getTransfersById = async (req, res) => {
     try {
         let id = req.params.id;
-        if(req.user.sub != id) return res.send({ message: 'You do not have authorization '});
-        let user = await User.findOne({_id: id})
+        if (req.user.sub != id) return res.send({ message: 'You do not have authorization ' });
+        let user = await User.findOne({ _id: id })
         let transfers = await Transfer.find({ DPIO: user.DPI });
-        if (!transfers) return res.status(404).send({ message: 'Transfers not found'});
+        if (!transfers) return res.status(404).send({ message: 'Transfers not found' });
         return res.send({ message: 'Transfers found', transfers });
     } catch (err) {
         console.error(err);
