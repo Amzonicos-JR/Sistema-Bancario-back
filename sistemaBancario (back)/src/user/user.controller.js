@@ -53,7 +53,7 @@ exports.createAccount = async(req, res)=>{
         }
         if(!params)  return res.send({message: 'Ingrese todos los campos requeridos'})
         if(data.ingresosMensuales<100) return res.send({message: 'Tus ingresos mensuales no suficientes para crear una cuenta'})
-        if(data.DPI.lenght < 13) return res.send({message:'El DPI ingresado no es válido'})
+        if(data.DPI.length != 13) return res.send({message:'El DPI ingresado no es válido'})
         data.role='CLIENT'
         data.noCuenta= getRandomIntInclusive(10000000,99999999)
         let userExist= await User.findOne({
