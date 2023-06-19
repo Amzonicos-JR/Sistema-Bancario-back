@@ -12,7 +12,7 @@ exports.test = (req, res) => {
 exports.newTransfer = async (req, res) => {
     try {
         let data = req.body;
-        data.DPI = req.user.DPI;
+        data.DPIO = req.user.DPI;
         // Verificar que la cuenta exista
         let accountExist = await User.findOne({ noCuenta: data.accountNo });
         if (!accountExist) return res.send({ message: 'The account number entered does not exist' })
@@ -47,6 +47,13 @@ exports.newTransfer = async (req, res) => {
         };
         if (sum + amountF == 10000) return res.send({ message: 'You cannot transfer more than Q10,000 per day.' })
         console.log(sum + amountF, 'Monto de transferencias por hoy / Paso')
+        //Sumar el movimiento que realizará la persona
+        let sumMovement = 1;
+        let updatedUser = await User.findOneAndUpdate(
+            {DPI: data.DPIO},
+            { $inc: { movimientos: sumMovement } },
+            { new: true }
+        );
         // Crear la instancia 
         let transfer = new Transfer(data);
         await transfer.save();
@@ -119,6 +126,11 @@ exports.revertir = async (req, res) => {
         let updateTransfer = await Transfer.findOneAndUpdate(
             { _id: idT },
             { $inc: { status: -1 } }
+        )
+        //Quitarle el movimiento que realizó
+        let updatedUser = await User.findOneAndUpdate(
+            { DPI: existTransfer.DPIO },
+            { $inc: { movimientos: -1 } }
         )
         return res.send({ message: 'Transfer Successfully reversed', updateTransfer });
     } catch (err) {
