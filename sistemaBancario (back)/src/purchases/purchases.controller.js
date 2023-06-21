@@ -14,7 +14,7 @@ exports.buyService = async (req, res) => {
         //Buscar al usuario con su id
         let user = await User.findOne({ _id: userId });
         //Verificamos si es un servicio lo que comprará
-        let serviceExist = await Service.findOne({ _id: shopId })
+        let serviceExist = await Service.findOne({ _id: shopId })        
         //Con el usuario encontrado actualizar y descontarle el precio del servicio en su saldo
         if (user.balance < serviceExist.price) return res.send({ message: 'Insufficient balance' });
         let newBalance = user.balance - serviceExist.price;
@@ -22,6 +22,12 @@ exports.buyService = async (req, res) => {
         let updatedUser = await User.findOneAndUpdate({ _id: userId }, { balance: newBalance }, { new: true });
         let subtotal = serviceExist.price
         data.total = subtotal;
+        let sumMovement = 1;
+        let userM = await User.findOneAndUpdate(
+            { _id: data.user },
+            { $inc: { movimientos: sumMovement } },
+            { new: true }
+        );
         let purchases = new Purchases(data);
         await purchases.save();
         return res.send({ message: 'Thanks for buying, in "purchases" you can see your invoice' });
@@ -52,6 +58,12 @@ exports.buyProduct = async (req, res) => {
             //Actualizar el stock del producto
             let updatedProduct = await Product.findOneAndUpdate({ _id: shopId }, { stock: newStock }, { new: true })
             data.total = shop;
+            let sumMovement = 1;
+            let userM = await User.findOneAndUpdate(
+                { _id: data.user },
+                { $inc: { movimientos: sumMovement } },
+                { new: true }
+            );
             let purchases = new Purchases(data);
             await purchases.save();
             return res.send({ message: 'Thanks for buying, in "purchases" you can see your invoice' });

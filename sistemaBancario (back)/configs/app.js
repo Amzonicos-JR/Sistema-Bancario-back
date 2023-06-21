@@ -18,6 +18,7 @@ const favoriteRoutes = require('../src/favorites/favorites.routes');
 const serviceBankRoutes = require('../src/servicesBank/serviceBank.routes')
 const productRoutes = require('../src/products/products.routes')
 const purchasesRoutes = require('../src/purchases/purchases.routes')
+const loanRoutes = require('../src/loan/loan.routes')
 
 //CONFIGURAR EL SERVIDOR HTTP DE EXPRESS
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +34,7 @@ app.use('/favorite', favoriteRoutes);
 app.use('/serviceBank', serviceBankRoutes);
 app.use('/product', productRoutes)
 app.use('/purchases', purchasesRoutes);
+app.use('/loan', loanRoutes);
 
 //Función donde se levanta el servidor
 exports.initServer = () => {
