@@ -6,6 +6,7 @@ const purchasesSchema = mongoose.Schema({
     service: {type: mongoose.Schema.Types.ObjectId, ref: 'Service', required: false},
     product: {type: mongoose.Schema.Types.ObjectId, ref: 'Products', required: false},
     amount: {type: Number, required: false},
+    date: {type: String, required: false},
     total: {type: Number, required: true}
 });
 

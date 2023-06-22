@@ -14,10 +14,20 @@ exports.buyService = async (req, res) => {
         //Buscar al usuario con su id
         let user = await User.findOne({ _id: userId });
         //Verificamos si es un servicio lo que comprará
-        let serviceExist = await Service.findOne({ _id: shopId })        
+        let serviceExist = await Service.findOne({ _id: shopId })
         //Con el usuario encontrado actualizar y descontarle el precio del servicio en su saldo
         if (user.balance < serviceExist.price) return res.send({ message: 'Insufficient balance' });
         let newBalance = user.balance - serviceExist.price;
+        let fecha = new Date();
+        data.date = fecha.toLocaleString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }).replace('.', ',');
+        data.amount = 1;
         //Actualizar el saldo del usuario luego de la compra
         let updatedUser = await User.findOneAndUpdate({ _id: userId }, { balance: newBalance }, { new: true });
         let subtotal = serviceExist.price
@@ -55,6 +65,15 @@ exports.buyProduct = async (req, res) => {
             //Actualizar el saldo del usuario luego de la compra
             let updatedUser = await User.findOneAndUpdate({ _id: userId }, { balance: newBalance }, { new: true });
             let newStock = productExist.stock - Number(data.amount)
+            let fecha = new Date();
+            data.date = fecha.toLocaleString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).replace('.', ',');
             //Actualizar el stock del producto
             let updatedProduct = await Product.findOneAndUpdate({ _id: shopId }, { stock: newStock }, { new: true })
             data.total = shop;
