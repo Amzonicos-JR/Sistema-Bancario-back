@@ -53,7 +53,7 @@ exports.createAccount = async(req, res)=>{
         }
         if(!params)  return res.send({message: 'Ingrese todos los campos requeridos'})
         if(data.ingresosMensuales<100) return res.send({message: 'Tus ingresos mensuales no suficientes para crear una cuenta'})
-        if(data.DPI.lenght < 13) return res.send({message:'El DPI ingresado no es válido'})
+        if(data.DPI.length != 13) return res.send({message:'El DPI ingresado no es válido'})
         data.role='CLIENT'
         data.noCuenta= getRandomIntInclusive(10000000,99999999)
         let userExist= await User.findOne({
@@ -76,27 +76,30 @@ exports.createAccount = async(req, res)=>{
     }
 }
 
-exports.login = async(req, res)=>{
-    try{
+exports.login = async (req, res) => {
+    try {
         let data = req.body;
         let credentials = {
             username: data.username,
             password: data.password
         }
         let msg = validateData(credentials);
-        if(msg) return res.status(400).send({message: msg})
-        let user = await User.findOne({username: data.username});
-        if(user && await checkPassword(data.password, user.password)) {
+        if (msg) return res.status(400).send(msg)
+        let user = await User.findOne({ username: data.username });
+        if (user && await checkPassword(data.password, user.password)) {
+            let userLogged = {
+                _id: user.id,
+                role: user.role
+            }
             let token = await createToken(user)
-            return res.send({message: 'User logged successfully', token});
+            return res.send({ message: 'User logged sucessfully', token, userLogged });
         }
-        return res.status(404).send({message: 'Invalid credentials'});
-    }catch(err){
+        return res.status(401).send({ message: 'Invalid credentials' });
+    } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error not logged'});
+        return res.status(500).send({ message: 'Error, not logged' });
     }
 }
-
 exports.getAccounts = async(req, res)=>{
     try{
         let accounts = await User.find({role: 'CLIENT'});
