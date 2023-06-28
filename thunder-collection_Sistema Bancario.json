@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Sistema Bancario",
-    "dateExported": "2023-06-09T08:17:44.910Z",
+    "dateExported": "2023-06-28T17:21:51.924Z",
     "version": "1.1",
     "folders": [
         {
@@ -24,6 +24,20 @@
             "containerId": "",
             "created": "2023-06-09T08:00:40.952Z",
             "sortNum": 30000
+        },
+        {
+            "_id": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "ServicesBank",
+            "containerId": "",
+            "created": "2023-06-09T15:55:59.453Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "3511f90f-92ec-4256-a58c-65347ed1ee52",
+            "name": "Deposit",
+            "containerId": "",
+            "created": "2023-06-28T16:39:32.105Z",
+            "sortNum": 50000
         }
     ],
     "requests": [
@@ -56,6 +70,79 @@
             "tests": []
         },
         {
+            "_id": "a8246102-aa82-4b75-a023-d6f5aae5dafc",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "add",
+            "url": "/serviceBank/add",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-09T15:55:59.453Z",
+            "modified": "2023-06-09T15:55:59.453Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lustrado de zapatos"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Zapatos de todo tipo (formales)"
+                    },
+                    {
+                        "name": "price",
+                        "value": "60"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "3d456bec-1451-4b23-a0ae-408f61319681",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "3511f90f-92ec-4256-a58c-65347ed1ee52",
+            "name": "new deposit",
+            "url": "/deposit/newDeposit",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-28T16:39:37.811Z",
+            "modified": "2023-06-28T17:08:01.156Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDg2OWM0NjU2YTM0NmI1ZmE0YmM5ZTkiLCJuYW1lIjoiQW16b25pY28iLCJzdXJuYW1lIjoiSnVuaW9yIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJlbWFpbCI6ImFtem9uaWNvQGdtYWlsLmNvbSIsIkRQSSI6IjEyMzQ1Njc4OSIsImRpcmVjdGlvbiI6IlpvbmEgMTAiLCJyb2xlIjoiQURNSU5BTSIsImlhdCI6MTY4Nzk3MDU2NywiZXhwIjoxNjg3OTc3NzY3fQ.oITaqzHydT8ENq_3SjJOB3jhiBzn_LaOGhZpg47rxT4\""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "DPIO",
+                        "value": "123456"
+                    },
+                    {
+                        "name": "DPIB",
+                        "value": "12345"
+                    },
+                    {
+                        "name": "accountNo",
+                        "value": "24435674"
+                    },
+                    {
+                        "name": "amount",
+                        "value": "300"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
             "_id": "2694cfa7-a968-4be5-8a43-320fb64c684c",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
             "containerId": "95a83d96-8a5c-4e28-b878-d7abf7007ddf",
@@ -64,11 +151,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-06-08T05:43:34.840Z",
-            "modified": "2023-06-09T08:02:57.315Z",
+            "modified": "2023-06-28T08:22:02.671Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDgyZGM1NWNlMWNlYWM4NzdjZDYzZDgiLCJuYW1lIjoiQW16b25pY28iLCJzdXJuYW1lIjoiSnVuaW9yIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJlbWFpbCI6ImFtem9uaWNvQGdtYWlsLmNvbSIsIkRQSSI6IjEyMzQ1Njc4OSIsImRpcmVjdGlvbiI6IlpvbmEgMTAiLCJyb2xlIjoiQURNSU5BTSIsImlhdCI6MTY4NjI5NzczNywiZXhwIjoxNjg2MzA0OTM3fQ.QkRkia0umAFm2AFaRSjCYH_awH3A1Jb5jGofvn8HmDM\""
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDgzNTVmNmMxNjY5ZmIwYmM4NjEwMDQiLCJuYW1lIjoiQW16b25pY28iLCJzdXJuYW1lIjoiSnVuaW9yIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJlbWFpbCI6ImFtem9uaWNvQGdtYWlsLmNvbSIsIkRQSSI6IjEyMzQ1Njc4OSIsImRpcmVjdGlvbiI6IlpvbmEgMTAiLCJyb2xlIjoiQURNSU5BTSIsImlhdCI6MTY4NjMyODg1NywiZXhwIjoxNjg2MzM2MDU3fQ.IJlEHdAzrj-hZGCaPBwg6K3DVsJmdDTn3_Ac5bn5YJM\"",
+                    "isDisabled": true
                 }
             ],
             "params": [],
@@ -98,7 +186,7 @@
                     },
                     {
                         "name": "DPI",
-                        "value": "12345678"
+                        "value": "123456"
                     },
                     {
                         "name": "direction",
@@ -110,7 +198,7 @@
                     },
                     {
                         "name": "balance",
-                        "value": "500"
+                        "value": "800"
                     },
                     {
                         "name": "noCuenta",
@@ -162,6 +250,39 @@
             "tests": []
         },
         {
+            "_id": "a92ff367-84ac-4432-9882-868eecdfd8fa",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "getAll",
+            "url": "/serviceBank/get",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-06-09T15:55:59.454Z",
+            "modified": "2023-06-09T15:55:59.454Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "fc2ceef9-4323-48d4-a43c-5b774baa29f0",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "3511f90f-92ec-4256-a58c-65347ed1ee52",
+            "name": "revertir transferencia Copy",
+            "url": "/deposit/revertirD/649c69908a0935b51ecd6ac6",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2023-06-28T17:03:45.907Z",
+            "modified": "2023-06-28T17:13:51.708Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDg2OWM0NjU2YTM0NmI1ZmE0YmM5ZTkiLCJuYW1lIjoiQW16b25pY28iLCJzdXJuYW1lIjoiSnVuaW9yIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJlbWFpbCI6ImFtem9uaWNvQGdtYWlsLmNvbSIsIkRQSSI6IjEyMzQ1Njc4OSIsImRpcmVjdGlvbiI6IlpvbmEgMTAiLCJyb2xlIjoiQURNSU5BTSIsImlhdCI6MTY4Nzk3MDU2NywiZXhwIjoxNjg3OTc3NzY3fQ.oITaqzHydT8ENq_3SjJOB3jhiBzn_LaOGhZpg47rxT4\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
             "_id": "fcb91417-3d77-49d5-aafd-f180e8ce4149",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
             "containerId": "95a83d96-8a5c-4e28-b878-d7abf7007ddf",
@@ -170,7 +291,7 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2023-06-08T05:44:35.128Z",
-            "modified": "2023-06-09T08:03:34.583Z",
+            "modified": "2023-06-28T16:42:47.388Z",
             "headers": [],
             "params": [],
             "body": {
@@ -179,11 +300,11 @@
                 "form": [
                     {
                         "name": "username",
-                        "value": "agt"
+                        "value": "adminb"
                     },
                     {
                         "name": "password",
-                        "value": "123"
+                        "value": "ADMINB"
                     }
                 ]
             },
@@ -204,6 +325,39 @@
             "tests": []
         },
         {
+            "_id": "bfbf6fee-c69c-4dd4-a929-907e62e04241",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "get",
+            "url": "/serviceBank/get/64815ab4f11bd65885a57190",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-06-09T15:55:59.455Z",
+            "modified": "2023-06-09T15:55:59.455Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6b55f03b-c5c2-40e8-94b1-8eb1383c2bc4",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "3511f90f-92ec-4256-a58c-65347ed1ee52",
+            "name": "get deposits",
+            "url": "/deposit/getD",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-06-28T17:12:01.990Z",
+            "modified": "2023-06-28T17:13:07.088Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDg2OWM0NjU2YTM0NmI1ZmE0YmM5ZTkiLCJuYW1lIjoiQW16b25pY28iLCJzdXJuYW1lIjoiSnVuaW9yIiwidXNlcm5hbWUiOiJhZG1pbmIiLCJlbWFpbCI6ImFtem9uaWNvQGdtYWlsLmNvbSIsIkRQSSI6IjEyMzQ1Njc4OSIsImRpcmVjdGlvbiI6IlpvbmEgMTAiLCJyb2xlIjoiQURNSU5BTSIsImlhdCI6MTY4Nzk3MDU2NywiZXhwIjoxNjg3OTc3NzY3fQ.oITaqzHydT8ENq_3SjJOB3jhiBzn_LaOGhZpg47rxT4\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
             "_id": "24c5810a-c5a6-4567-9ac4-5ecf96326b40",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
             "containerId": "79b8f9dd-f360-49bc-8556-de4c7aa8f02d",
@@ -212,11 +366,11 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2023-06-08T06:01:17.161Z",
-            "modified": "2023-06-09T08:12:23.591Z",
+            "modified": "2023-06-12T04:41:19.479Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDgyZGM5M2NlMWNlYWM4NzdjZDYzZGUiLCJuYW1lIjoiQWxlc3NhbmRybyIsInN1cm5hbWUiOiJHdXRpw6lycmV6IiwidXNlcm5hbWUiOiJhZ3QiLCJub0N1ZW50YSI6IjM3NDM2MTgzIiwiZW1haWwiOiJhZ3RAZ21haWwiLCJEUEkiOiIxMjM0NSIsImRpcmVjdGlvbiI6IlpvbmEgNiIsImluZ3Jlc29zTWVuc3VhbGVzIjoiMTAwMCIsImJhbGFuY2UiOjUwMCwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTY4NjI5NzgxNCwiZXhwIjoxNjg2MzA1MDE0fQ.P-O4h2nOIIkF0ewvZKntcKGWPJ_IZtrNF0INKxXMzew\""
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDg2OWM1ZGExNmQ5N2M2NTAwNzY1YjUiLCJuYW1lIjoiQWxlc3NhbmRybyIsInN1cm5hbWUiOiJHdXRpw6lycmV6IiwidXNlcm5hbWUiOiJhZ3QiLCJub0N1ZW50YSI6IjI0NDM1Njc0IiwiZW1haWwiOiJhZ3RAZ21haWwiLCJEUEkiOiIxMjM0NSIsImRpcmVjdGlvbiI6IlpvbmEgNiIsImluZ3Jlc29zTWVuc3VhbGVzIjoiMTAwMCIsImJhbGFuY2UiOjYwMCwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTY4NjU0MzQ3MiwiZXhwIjoxNjg2NTUwNjcyfQ.FBXkzPJ1AtOJlCRo5Q642rB4b64OdzD3wOp9715-QU8\""
                 }
             ],
             "params": [],
@@ -226,15 +380,15 @@
                 "form": [
                     {
                         "name": "accountNo",
-                        "value": "48282770"
+                        "value": "45133593"
                     },
                     {
                         "name": "amount",
-                        "value": "550"
+                        "value": "30"
                     },
                     {
                         "name": "DPIB",
-                        "value": "12345678"
+                        "value": "123456"
                     }
                 ]
             },
@@ -255,22 +409,35 @@
             "tests": []
         },
         {
-            "_id": "ebaea7b5-667c-4d8f-871c-77e364c34764",
+            "_id": "e58ddc68-7af8-460a-883e-0e0f1b3245da",
             "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
-            "containerId": "79b8f9dd-f360-49bc-8556-de4c7aa8f02d",
-            "name": "revertir transferencia",
-            "url": "/transfer/revertirT/6482df47595bc1762f9219b2",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "update",
+            "url": "/serviceBank/update/64815ab4f11bd65885a57190",
             "method": "PUT",
-            "sortNum": 50000,
-            "created": "2023-06-09T06:02:29.636Z",
-            "modified": "2023-06-09T08:14:26.014Z",
-            "headers": [
-                {
-                    "name": "Authorization",
-                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDgyZGM5M2NlMWNlYWM4NzdjZDYzZGUiLCJuYW1lIjoiQWxlc3NhbmRybyIsInN1cm5hbWUiOiJHdXRpw6lycmV6IiwidXNlcm5hbWUiOiJhZ3QiLCJub0N1ZW50YSI6IjM3NDM2MTgzIiwiZW1haWwiOiJhZ3RAZ21haWwiLCJEUEkiOiIxMjM0NSIsImRpcmVjdGlvbiI6IlpvbmEgNiIsImluZ3Jlc29zTWVuc3VhbGVzIjoiMTAwMCIsImJhbGFuY2UiOjUwMCwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTY4NjI5NzgxNCwiZXhwIjoxNjg2MzA1MDE0fQ.P-O4h2nOIIkF0ewvZKntcKGWPJ_IZtrNF0INKxXMzew\""
-                }
-            ],
+            "sortNum": 40000,
+            "created": "2023-06-09T15:55:59.456Z",
+            "modified": "2023-06-09T15:55:59.456Z",
+            "headers": [],
             "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Lavado de carro"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Impresionante carwash"
+                    },
+                    {
+                        "name": "price",
+                        "value": "200"
+                    }
+                ]
+            },
             "tests": []
         },
         {
@@ -307,6 +474,20 @@
                     }
                 ]
             },
+            "tests": []
+        },
+        {
+            "_id": "4be7c872-471d-4f3a-8c5f-094e2dfb4dad",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "94ab1a89-196a-4621-b2d2-723103b2980c",
+            "name": "delete",
+            "url": "/serviceBank/delete/64815ab4f11bd65885a57190",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-06-09T15:55:59.457Z",
+            "modified": "2023-06-09T15:55:59.457Z",
+            "headers": [],
+            "params": [],
             "tests": []
         },
         {
@@ -351,6 +532,25 @@
                 {
                     "name": "Authorization",
                     "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDgxN2E1OWZkNWVjODNiNTBhMzA3ZjUiLCJuYW1lIjoiQWxlc3NhbmRybzIiLCJzdXJuYW1lIjoiR3V0acOpcnJlejIiLCJ1c2VybmFtZSI6ImFndDMiLCJub0N1ZW50YSI6IjczNjEyMzM1IiwiZW1haWwiOiJhZ3RAZ21haWwyIiwiRFBJIjoiMTIzNDU2NzgiLCJkaXJlY3Rpb24iOiJab25hIDYiLCJpbmdyZXNvc01lbnN1YWxlcyI6IjEwMDAiLCJiYWxhbmNlIjo3MjAsInJvbGUiOiJDTElFTlQiLCJpYXQiOjE2ODYyOTc0NzUsImV4cCI6MTY4NjMwNDY3NX0.99waFs8Yh3cGogksyKjGKEq-v5Q8EckRcEY3cAmFsOs\""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ebaea7b5-667c-4d8f-871c-77e364c34764",
+            "colId": "d77669ae-ca4e-42b9-a58b-2e860da3c1b6",
+            "containerId": "79b8f9dd-f360-49bc-8556-de4c7aa8f02d",
+            "name": "revertir transferencia",
+            "url": "/transfer/revertirT/6486a1ef9a1e1eacaa8aa723",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2023-06-09T06:02:29.636Z",
+            "modified": "2023-06-12T04:41:48.514Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDg2OWM1ZGExNmQ5N2M2NTAwNzY1YjUiLCJuYW1lIjoiQWxlc3NhbmRybyIsInN1cm5hbWUiOiJHdXRpw6lycmV6IiwidXNlcm5hbWUiOiJhZ3QiLCJub0N1ZW50YSI6IjI0NDM1Njc0IiwiZW1haWwiOiJhZ3RAZ21haWwiLCJEUEkiOiIxMjM0NSIsImRpcmVjdGlvbiI6IlpvbmEgNiIsImluZ3Jlc29zTWVuc3VhbGVzIjoiMTAwMCIsImJhbGFuY2UiOjYwMCwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTY4NjU0MzQ3MiwiZXhwIjoxNjg2NTUwNjcyfQ.FBXkzPJ1AtOJlCRo5Q642rB4b64OdzD3wOp9715-QU8\""
                 }
             ],
             "params": [],
