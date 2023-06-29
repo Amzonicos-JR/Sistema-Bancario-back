@@ -28,7 +28,7 @@ exports.add = async(req, res)=>{
 exports.get = async(req, res)=>{
     try{
         let products = await Product.find()
-        return res.send({products})
+        return res.status(200).send({products})
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error to getting products'})
