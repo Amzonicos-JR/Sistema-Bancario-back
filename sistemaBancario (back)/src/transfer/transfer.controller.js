@@ -47,6 +47,13 @@ exports.newTransfer = async (req, res) => {
         };
         if (sum + amountF == 10000) return res.send({ message: 'You cannot transfer more than Q10,000 per day.' })
         console.log(sum + amountF, 'Monto de transferencias por hoy / Paso')
+        //Sumar el movimiento que realizará la persona
+        let sumMovement = 1;
+        let updatedUser = await User.findOneAndUpdate(
+            {DPI: data.DPIO},
+            { $inc: { movimientos: sumMovement } },
+            { new: true }
+        );
         // Crear la instancia 
         let transfer = new Transfer(data);
         await transfer.save();
@@ -120,6 +127,11 @@ exports.revertir = async (req, res) => {
             { _id: idT },
             { $inc: { status: -1 } }
         )
+        //Quitarle el movimiento que realizó
+        let updatedUser = await User.findOneAndUpdate(
+            { DPI: existTransfer.DPIO },
+            { $inc: { movimientos: -1 } }
+        )
         return res.send({ message: 'Transfer Successfully reversed', updateTransfer });
     } catch (err) {
         console.error(err);
@@ -153,3 +165,4 @@ exports.getTransfersById = async (req, res) => {
         return res.status(500).send({ message: 'Error not found' });
     }
 }
+

@@ -20,11 +20,6 @@ const productsSchema = mongoose.Schema({
         type: Number,
         require: true,
         default: 0
-    },
-    total: {
-        type: Number,
-        require: true,
-        default: 0
     }
 },{
     versionKey: false,
