@@ -19,13 +19,8 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-<<<<<<< HEAD
-    noCuenta:{
-        type: Number
-=======
     noCuenta: {
         type: String
->>>>>>> asumpango-2018373
     },
     email: {
         type: String,
@@ -40,13 +35,9 @@ const userSchema = mongoose.Schema({
         required: true
     },
     ingresosMensuales: {
-        type: Number
+        type: String
     },
-<<<<<<< HEAD
-    balance:{
-=======
     balance: {
->>>>>>> asumpango-2018373
         type: Number
     },
     movimientos: {
