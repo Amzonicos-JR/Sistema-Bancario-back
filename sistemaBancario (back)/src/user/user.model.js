@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema({
         required: true
     },
     noCuenta: {
+        type: Number
+    },
+    noCuenta: {
         type: String
     },
     email: {
@@ -35,18 +38,23 @@ const userSchema = mongoose.Schema({
         required: true
     },
     ingresosMensuales: {
-        type: String
-    },
-    balance: {
         type: Number
     },
-    movimientos: {
-        type: String
-    },
-    role: {
-        type: String,
-        required: true,
-        uppercase: true
+    balance: {
+
+        balance: {
+            balance: {
+                type: Number
+            },
+            movimientos: {
+                type: String
+            },
+            role: {
+                type: String,
+                required: true,
+                uppercase: true
+            }
+        }
     }
 }, {
     versionKey: false

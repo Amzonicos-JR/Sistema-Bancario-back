@@ -13,5 +13,6 @@ api.get('/getAdmin', [ensureAuth, isAdmin], userController.getAdminById)
 api.post('/createAccount', ensureAuth, userController.createAccount);
 api.post('/login', userController.login);
 api.delete('/delete/:id', [ensureAuth], userController.delete);
+api.put('/update/:id', [ensureAuth, isAdmin], userController.update);
 
 module.exports = api;

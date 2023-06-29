@@ -17,6 +17,8 @@ const transferRoutes = require('../src/transfer/transfer.routes')
 const favoriteRoutes = require('../src/favorites/favorites.routes');
 const serviceBankRoutes = require('../src/servicesBank/serviceBank.routes');
 const depositController = require('../src/deposit/deposit.routes');
+const serviceBankRoutes = require('../src/servicesBank/serviceBank.routes')
+const productRoutes = require('../src/products/products.routes')
 
 //CONFIGURAR EL SERVIDOR HTTP DE EXPRESS
 app.use(express.urlencoded({ extended: false }));
@@ -31,6 +33,10 @@ app.use('/transfer', transferRoutes);
 app.use('/deposit', depositController);
 app.use('/favorite', favoriteRoutes);
 app.use('/serviceBank', serviceBankRoutes);
+app.use('/transfer', transferRoutes)
+app.use('/favorite', favoriteRoutes);
+app.use('/serviceBank', serviceBankRoutes);
+app.use('/product', productRoutes)
 
 //Función donde se levanta el servidor
 exports.initServer = () => {
