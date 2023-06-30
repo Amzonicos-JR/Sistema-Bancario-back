@@ -13,6 +13,8 @@ exports.test = (req, res)=>{
 exports.add = async(req, res)=>{
     try{
         let data = req.body
+        let productExist = await Product.findOne({name: data.name})
+        if(productExist) return res.status(404).send({message: "Product name already exist"})
         let total = 0
         total = total+(data.price * data.stock)
         data.total = total

@@ -36,6 +36,24 @@ exports.newTransfer = async (req, res) => {
             second: '2-digit'
         }).replace('.', ','); //Formato de fecha formateado a las convecciones del navegador(Español)
         // Validar que no pueda transferir mas de (Q 10,000) por dia
+        let amount = data.amount;
+        let amountF = 0;
+        amountF = parseInt(amount);
+        let transfersFound = await Transfer.find({ status: 1 }, { DPIO: data.DPIO }, { date: data.date }).select('amount');
+        // Recorrer las transferencias encontradas y sumar los amount
+        let sum = 0;
+        for (let i = 0; i < transfersFound.length; i++) {
+            sum += transfersFound[i].amount;
+        };
+        if (sum + amountF == 10000) return res.send({ message: 'You cannot transfer more than Q10,000 per day.' })
+        console.log(sum + amountF, 'Monto de transferencias por hoy / Paso')
+        //Sumar el movimiento que realizará la persona
+        let sumMovement = 1;
+        let updatedUser = await User.findOneAndUpdate(
+            {DPI: data.DPIO},
+            { $inc: { movimientos: sumMovement } },
+            { new: true }
+        );
         // Crear la instancia 
         let transfer = new Transfer(data);
         await transfer.save();
@@ -109,6 +127,11 @@ exports.revertir = async (req, res) => {
             { _id: idT },
             { $inc: { status: -1 } }
         )
+        //Quitarle el movimiento que realizó
+        let updatedUser = await User.findOneAndUpdate(
+            { DPI: existTransfer.DPIO },
+            { $inc: { movimientos: -1 } }
+        )
         return res.send({ message: 'Transfer Successfully reversed', updateTransfer });
     } catch (err) {
         console.error(err);
@@ -121,24 +144,23 @@ exports.getTransfers = async (req, res) => {
     try {
         let transfers = await Transfer.find();
         if (!transfers) return res.status(404).send({ message: 'Transfers not found' });
-        return res.send({ message: 'Transfers found', transfers});
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: 'Error not found' });
-    }
-}
-
-// Obtener todas las transferencias de tu cuenta
-exports.getTransfersById = async (req, res) => {
-    try {
-        let id = req.params.id;
-        if(req.user.sub != id) return res.send({ message: 'You do not have authorization '});
-        let user = await User.findOne({_id: id})
-        let transfers = await Transfer.find({ DPIO: user.DPI });
-        if (!transfers) return res.status(404).send({ message: 'Transfers not found'});
         return res.send({ message: 'Transfers found', transfers });
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Error not found' });
     }
 }
+
+// Obtener las transferencias de un usuario
+exports.getTransfersById = async (req, res) => {
+    try {
+        console.log(req.user)
+        let transfers = await Transfer.find({ DPIO: req.user.DPI, status: 1 });
+        if (!transfers) return res.status(404).send({ message: 'Transfers not found' });
+        return res.send({ message: 'Transfers found', transfers });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error not found' });
+    }
+}
+

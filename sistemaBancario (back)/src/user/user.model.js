@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema({
         type: Number
     },
     movimientos: {
-        type: String
+        type: Number
     },
     role: {
         type: String,
