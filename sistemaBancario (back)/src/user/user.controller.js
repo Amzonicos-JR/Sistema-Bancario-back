@@ -3,7 +3,7 @@
 const User = require('./user.model');
 const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
 const { createToken } = require('../services/jwt');
-const userInfo = ['DPI', 'noCuenta', 'name', 'surname', 'email', 'balance']
+const userInfo = ['DPI', 'noCuenta', 'name', 'surname', 'email', 'balance', 'movimientos']
 
 exports.test = (req, res)=>{
     res.send({message: 'Test function is running', user: req.user});
