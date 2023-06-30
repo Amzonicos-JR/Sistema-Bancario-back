@@ -8,6 +8,8 @@ exports.addLoan = async (req, res) => {
         //Buscar al usuario por su DPI
         let user = await User.findOne({ DPI: data.DPI });
         if (!user) return res.send({ message: 'User not found' });
+        let userLoan = await Loan.findOne({DPI: data.DPI})
+        if(userLoan) return res.send({message: 'User have a loan'})
         data.interestRate = 12;
         if (data.amount < 1000) {//Verificar que sea el minimo
             return res.send({ message: 'The minimum is 1000' })
