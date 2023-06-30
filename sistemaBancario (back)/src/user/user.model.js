@@ -35,13 +35,13 @@ const userSchema = mongoose.Schema({
         required: true
     },
     ingresosMensuales: {
-        type: String
+        type: Number
     },
     balance: {
         type: Number
     },
     movimientos: {
-        type: String
+        type: Number
     },
     role: {
         type: String,
