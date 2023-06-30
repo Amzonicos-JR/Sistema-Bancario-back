@@ -3,6 +3,7 @@
 const User = require('./user.model');
 const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
 const { createToken } = require('../services/jwt');
+const userInfo = ['DPI', 'noCuenta', 'name', 'surname', 'email', 'balance']
 
 exports.test = (req, res)=>{
     res.send({message: 'Test function is running', user: req.user});
@@ -102,12 +103,24 @@ exports.login = async (req, res) => {
 }
 exports.getAccounts = async(req, res)=>{
     try{
-        let accounts = await User.find({role: 'CLIENT'});
-        if(!accounts) return res.status(404).send({message: 'Accounts not found'});
-        return res.send({message: 'Accounts found', accounts});
+        let users = await User.find({role: 'CLIENT'}).select(userInfo);
+        if(!users) return res.status(404).send({message: 'Accounts not found'});
+        return res.send({message: 'Accounts found', users});
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error not found'});
+    }
+}
+
+exports.get = async(req, res)=>{
+    try {
+        let users = await User.find();
+        if(!users) return res.status(404).send({message: 'Users not found'});
+        return res.send({message: 'Users found', users});
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error not found'})
     }
 }
 
@@ -149,8 +162,8 @@ exports.getAdminById = async(req, res)=>{
 exports.delete = async(req, res)=>{
     try{
         let userId = req.params.id;
-        if( userId != req.user.sub) return res.status(401).send({message: 'Dont have permission to do this action'});
-        let userDeleted = await User.findOneAndDelete({_id: req.user.sub});
+        //if( userId != req.user.sub) return res.status(401).send({message: 'Dont have permission to do this action'});
+        let userDeleted = await User.findOneAndDelete({_id: userId});
         if(!userDeleted) return res.send({message: 'Account not found and not deleted'});
         return res.send({message: `Account with username ${userDeleted.username} deleted sucessfully`});
     }catch(err){
