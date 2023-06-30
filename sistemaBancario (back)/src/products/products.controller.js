@@ -13,11 +13,11 @@ exports.test = (req, res)=>{
 exports.add = async(req, res)=>{
     try{
         let data = req.body
-        //Validar que no se duplique el producto
-        const exists = await Product.exists({ name: data.name });
-        if (exists) {
-            return res.status(201).send({ message: 'The product already exists' });
-        };
+        let productExist = await Product.findOne({name: data.name})
+        if(productExist) return res.status(404).send({message: "Product name already exist"})
+        let total = 0
+        total = total+(data.price * data.stock)
+        data.total = total
         let product = new Product(data)
         await product.save()
         return res.send({message: 'Product saved successfully', product})

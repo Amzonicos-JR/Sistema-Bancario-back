@@ -6,7 +6,7 @@ const api = express.Router()
 
 api.get('/test', productsController.test)
 api.get('/get', productsController.get)
-api.get('/getProduct/:id', productsController.getProduct)
+api.get('/get/:id', productsController.getProduct)
 api.post('/add', productsController.add)
 api.put('/update/:id', productsController.update)
 api.delete('/delete/:id', productsController.delete)
