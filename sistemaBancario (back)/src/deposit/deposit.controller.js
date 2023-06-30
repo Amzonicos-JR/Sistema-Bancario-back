@@ -120,7 +120,7 @@ exports.revertir = async (req, res) => {
 // Obtener todos los depositos
 exports.getDeposits = async (req, res) => {
     try {
-        let deposit = await Deposit.find();
+        let deposit = await Deposit.find({status: 1});
         if (!deposit) return res.status(404).send({ message: 'Deposits not found' });
         return res.send({ message: 'Deposits found', deposit });
     } catch (err) {

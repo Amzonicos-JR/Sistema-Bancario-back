@@ -30,10 +30,22 @@ exports.add = async(req, res)=>{
 exports.get = async(req, res)=>{
     try{
         let products = await Product.find()
-        return res.send({products})
+        return res.status(200).send({products})
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error to getting products'})
+    }
+}
+
+exports.getProduct = async(req, res)=>{
+    try{
+        let idProduct = req.params.id
+        let product = await Product.findOne({_id: idProduct})
+        if(!product) return res.status(404).send({message: "Product not found"}) 
+        return res.send({product})
+    }catch(err){
+        console.error(err)
+        return res.status(500).send({message: "Error to getting product"})
     }
 }
 
@@ -55,6 +67,8 @@ exports.update = async(req, res)=>{
         let data = req.body
         let total = 0
         let product = await Product.findOne({_id: idProduct})
+        if(!data.name) data.name = product.name
+        if(!data.description) data.description = product.description
         if(!data.price) data.price = product.price
         if(!data.stock) data.stock = product.stock
         total = data.price*data.stock

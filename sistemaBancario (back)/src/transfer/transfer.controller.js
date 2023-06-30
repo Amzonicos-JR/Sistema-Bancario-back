@@ -151,13 +151,11 @@ exports.getTransfers = async (req, res) => {
     }
 }
 
-// Obtener todas las transferencias de tu cuenta
+// Obtener las transferencias de un usuario
 exports.getTransfersById = async (req, res) => {
     try {
-        let id = req.params.id;
-        if (req.user.sub != id) return res.send({ message: 'You do not have authorization ' });
-        let user = await User.findOne({ _id: id })
-        let transfers = await Transfer.find({ DPIO: user.DPI });
+        console.log(req.user)
+        let transfers = await Transfer.find({ DPIO: req.user.DPI, status: 1 });
         if (!transfers) return res.status(404).send({ message: 'Transfers not found' });
         return res.send({ message: 'Transfers found', transfers });
     } catch (err) {
