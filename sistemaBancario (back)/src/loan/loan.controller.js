@@ -14,6 +14,15 @@ exports.addLoan = async (req, res) => {
         } else if (data.amount > 10000) {//Verificar que no sobrepase el máximo
             return res.send({ message: 'The maximum is 10000' })
         }
+        let fecha = new Date();
+        data.date = fecha.toLocaleString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }).replace('.', ',');
         let interes = Number(data.interestRate) * Number(data.amount) / 100;
         let pay = Number(interes) + Number(data.amount);
         data.monthlyFee = Number(pay) / Number(data.durationMonths);
@@ -54,5 +63,18 @@ exports.getLoanByUser = async (req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Error getting loan' })
+    }
+}
+
+// Obtener las prestamos de un usuario
+exports.getLoanbyId = async (req, res) => {
+    try {
+        console.log(req.user, 's')
+        let loans = await Loan.find({ DPI: req.user.DPI});
+        if (!loans) return res.status(404).send({ message: 'Loans not found' });
+        return res.send({ message: 'Loans found', loans });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error not found' });
     }
 }

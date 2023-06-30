@@ -9,6 +9,6 @@ const {ensureAuth} = require('../services/authenticated')
 api.post('/add', loanController.addLoan);
 api.get('/get', loanController.getLoans);
 api.get('/getLoan', loanController.getLoanByUser);
-
+api.get('/getLoansById', ensureAuth, loanController.getLoanbyId)
 
 module.exports = api;

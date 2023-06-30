@@ -128,3 +128,15 @@ exports.getDeposits = async (req, res) => {
         return res.status(500).send({ message: 'Error not found' });
     }
 }
+
+// Obtener las transferencias de un usuario
+exports.getDepositbyId = async (req, res) => {
+    try {
+        let deposits = await Deposit.find({ DPIO: req.user.DPI, status: 1 });
+        if (!deposits) return res.status(404).send({ message: 'Deposits not found' });
+        return res.send({ message: 'Deposits found', deposits });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error not found' });
+    }
+}

@@ -9,6 +9,7 @@ const loanSchema = mongoose.Schema({
     interestRate: {type: Number, required: true},
     durationMonths: {type: Number, required: true},
     monthlyFee: {type: Number, required: true},
+    date: {type: String},
     totalPay: {type: Number, required: true}
 });
 

@@ -9,6 +9,6 @@ const { ensureAuth, isAdmin } = require('../services/authenticated');
 api.post('/newDeposit', [ensureAuth], depositController.newDeposit);
 api.put('/revertirD/:id', [ensureAuth], depositController.revertir);
 api.get('/getD', [ensureAuth], depositController.getDeposits);
-// api.get('/getTransfersById/:id', [ensureAuth], transferController.getTransfersById);
+api.get('/getTransfersById', [ensureAuth], depositController.getDepositbyId);
 
 module.exports = api;
