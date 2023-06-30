@@ -151,7 +151,7 @@ exports.getAccountById = async(req, res)=>{
 exports.getProfile = async (req, res)=>{
     try {
         //let userId = req.params.id;
-        let user = await User.findOne({ _id: req.user.sub}).select('name');
+        let user = await User.findOne({ _id: req.user.sub})
         if (!user) return res.status(404).send({ message: 'User not found' });
         return res.send({ message: 'User found', user: user })
     } catch (err) {
@@ -212,6 +212,7 @@ exports.updatePassword = async (req, res) => {
       //let userId = req.params.id;
       let user = await User.findOne({ _id: req.user.sub });
       if (await checkPassword(data.password, user.password)) {
+        if (Object.entries(data).length === 0) return res.status(400).send({ message: 'Have submitted some data that cannot be updated' });
         let newPassword = await encrypt(data.newPassword);
         let updatePassword = await User.findOneAndUpdate(
           { _id: req.user.sub },
@@ -221,10 +222,10 @@ exports.updatePassword = async (req, res) => {
         if (!updatePassword)
           return res
             .status(404)
-            .send({ message: "User not foun and password not updated" });
+            .send({ message: "User not found and password not updated" });
         return res.send({
           message: "The password has been successfully updated",
-          updatePassword,
+          updatePassword
         });
       } else {
         return res.send({ message: "Passwords do not match" });
