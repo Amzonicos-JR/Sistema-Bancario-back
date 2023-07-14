@@ -8,10 +8,11 @@ const { ensureAuth } = require('../services/authenticated')
 
 //Rutas Privadas 
 api.get('/test', favoriteController.test)
-api.get('/get', favoriteController.getFavorites)
-api.get('/get/:id', favoriteController.getFavorite);
-api.post('/add', favoriteController.addFavorite)
-api.put('/update/:id', favoriteController.updateFavorite)
-api.delete('/delete/:id', favoriteController.deleteFavorite);
+api.post('/add', [ensureAuth],favoriteController.addFavorite)
+api.get('/get', [ensureAuth],favoriteController.get)
+api.get('/getById/:id',[ensureAuth], favoriteController.getById);
+api.put('/update/:id',[ensureAuth], favoriteController.updateFavorite)
+api.delete('/delete/:id', [ensureAuth],favoriteController.deleteFavorite);
+
 
 module.exports = api;
