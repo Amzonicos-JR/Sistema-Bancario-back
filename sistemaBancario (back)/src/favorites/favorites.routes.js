@@ -13,6 +13,6 @@ api.get('/get', [ensureAuth],favoriteController.get)
 api.get('/getById/:id',[ensureAuth], favoriteController.getById);
 api.put('/update/:id',[ensureAuth], favoriteController.updateFavorite)
 api.delete('/delete/:id', [ensureAuth],favoriteController.deleteFavorite);
-
+// api.post('/transferF/:id', [ensureAuth], favoriteController.transferF);
 
 module.exports = api;

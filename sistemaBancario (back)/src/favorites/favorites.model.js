@@ -13,6 +13,10 @@ const favoriteSchema = mongoose.Schema({
         type: String,
         required: true,
     }, 
+    DPI:{
+        type: String,
+        required: true
+    },
     noCuenta:{
         type: String,
         required: true
