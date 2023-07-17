@@ -3,6 +3,8 @@
 const User = require('./user.model');
 const { validateData, encrypt, checkPassword, checkUpdate } = require('../utils/validate');
 const { createToken } = require('../services/jwt');
+const userInfo = ['DPI', 'noCuenta', 'name', 'surname', 'email', 'balance', 'movimientos']
+const infoUpdate = ['DPI', 'name', 'surname', 'username', 'email', 'direction', 'ingresosMensuales']
 
 exports.test = (req, res)=>{
     res.send({message: 'Test function is running', user: req.user});
@@ -102,12 +104,24 @@ exports.login = async (req, res) => {
 }
 exports.getAccounts = async(req, res)=>{
     try{
-        let accounts = await User.find({role: 'CLIENT'});
-        if(!accounts) return res.status(404).send({message: 'Accounts not found'});
-        return res.send({message: 'Accounts found', accounts});
+        let users = await User.find({role: 'CLIENT'}).select(userInfo);
+        if(!users) return res.status(404).send({message: 'Accounts not found'});
+        return res.send({message: 'Accounts found', users});
     }catch(err){
         console.error(err);
         return res.status(500).send({message: 'Error not found'});
+    }
+}
+
+exports.get = async(req, res)=>{
+    try {
+        let users = await User.find();
+        if(!users) return res.status(404).send({message: 'Users not found'});
+        return res.send({message: 'Users found', users});
+
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send({message: 'Error not found'})
     }
 }
 
@@ -118,19 +132,31 @@ exports.getAdmins = async(req, res)=>{
         return res.send({message: 'Admins found', admins});
     }catch(err){
         console.error(err);
-        return res.status(500).send({message: 'Error not found'});
+        return res.status(500).send({message: 'Error not found'});      
     }
 }
 
 exports.getAccountById = async(req, res)=>{
-    try{
+    try {
         let userId = req.params.id;
-        let existAccount = await User.findOne({_id: userId, role:'CLIENT'});
-        if(!existAccount) return res.status(404).send({message: 'Account not found or is not client role'});
-        return res.send({message: 'Account found', existAccount});
-    }catch(err){
+        let user = await User.findOne({ _id: userId }).select(infoUpdate);
+        if (!user) return res.status(404).send({ message: 'User not found' });
+        return res.send({ message: 'User found', user: user })
+    } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error not found'});
+        return res.statuts(500).send({ message: 'Error getting user' });
+    }
+}
+
+exports.getProfile = async (req, res)=>{
+    try {
+        //let userId = req.params.id;
+        let user = await User.findOne({ _id: req.user.sub})
+        if (!user) return res.status(404).send({ message: 'User not found' });
+        return res.send({ message: 'User found', user: user })
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error getting user' });
     }
 }
 
@@ -149,8 +175,8 @@ exports.getAdminById = async(req, res)=>{
 exports.delete = async(req, res)=>{
     try{
         let userId = req.params.id;
-        if( userId != req.user.sub) return res.status(401).send({message: 'Dont have permission to do this action'});
-        let userDeleted = await User.findOneAndDelete({_id: req.user.sub});
+        //if( userId != req.user.sub) return res.status(401).send({message: 'Dont have permission to do this action'});
+        let userDeleted = await User.findOneAndDelete({_id: userId});
         if(!userDeleted) return res.send({message: 'Account not found and not deleted'});
         return res.send({message: `Account with username ${userDeleted.username} deleted sucessfully`});
     }catch(err){
@@ -159,22 +185,53 @@ exports.delete = async(req, res)=>{
     }
 }
 
-exports.update = async(req, res)=>{
-    try{
+exports.update = async (req, res) => {
+    try {
         let userId = req.params.id;
         let data = req.body;
-        if(userId != req.user.sub) return res.status(401).send({message: 'Dont have permission to do this action'});
-        let update = checkUpdate(data, true);
-        if(!update) return res.status(400).send({message: 'Have submitted some data that cannot be updated'});
-        let userUpdated = await User.findOneAndUpdate(
-            {_id: req.user.sub},
-            data,
-            {new: true} 
-        )
-        if(!userUpdated) return res.status(404).send({message: 'User not found adn not updated'});
-        return res.send({message: 'User updated', userUpdated})
-    }catch(err){
+        if (data.password || Object.entries(data).length === 0 || data.role || data.DPI) return res.status(400).send({ message: 'Have submitted some data that cannot be updated' });
+        let existUser = await User.findOne({ _id: userId });
+        if (existUser) {
+            let userUp = await User.findOneAndUpdate(
+                { _id: userId },
+                data,
+                { new: true }
+            )
+            return res.send({ message: 'Updating user', userUp });
+        }
+        return res.send({ message: 'User not found or not updating' });
+    } catch (err) {
         console.error(err);
-        return res.status(500).send({message: 'Error not updated', err: `Username ${err.keyValue.username} is already taken`});
+        return res.status(500).send({ message: 'Error updating user' })
     }
 }
+
+exports.updatePassword = async (req, res) => {
+    try {
+      let data = req.body;
+      //let userId = req.params.id;
+      let user = await User.findOne({ _id: req.user.sub });
+      if (await checkPassword(data.password, user.password)) {
+        if (Object.entries(data).length === 0) return res.status(400).send({ message: 'Have submitted some data that cannot be updated' });
+        let newPassword = await encrypt(data.newPassword);
+        let updatePassword = await User.findOneAndUpdate(
+          { _id: req.user.sub },
+          { password: newPassword },
+          { new: true }
+        );
+        if (!updatePassword)
+          return res
+            .status(404)
+            .send({ message: "User not found and password not updated" });
+        return res.send({
+          message: "The password has been successfully updated",
+          updatePassword
+        });
+      } else {
+        return res.send({ message: "Passwords do not match" });
+      }
+    } catch (err) {
+      console.error(err);
+      return res.send({ message: "Error, could not update password" });
+    }
+  };

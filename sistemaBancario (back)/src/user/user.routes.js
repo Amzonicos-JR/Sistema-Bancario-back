@@ -12,6 +12,8 @@ api.get('/getAccount',[ensureAuth, isAdmin], userController.getAccountById)
 api.get('/getAdmin', [ensureAuth, isAdmin], userController.getAdminById)
 api.post('/createAccount', [ensureAuth, isAdmin], userController.createAccount);
 api.post('/login', userController.login);
-api.delete('/delete/:id', [ensureAuth], userController.delete);
-
+api.post('/get', userController.get);
+api.delete('/delete/:id', [ensureAuth, isAdmin], userController.delete);
+api.get('/getProfile', [ensureAuth], userController.getProfile);
+api.put('/updatePassword', [ensureAuth], userController.updatePassword);
 module.exports = api;
