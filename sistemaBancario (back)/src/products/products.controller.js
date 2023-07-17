@@ -1,5 +1,8 @@
 'use strict'
 const Product = require('./products.model')
+const Transfer = require('../transfer/transfer.model')
+const Deposit = require('../deposit/deposit.model')
+const Loan = require('../loan/loan.model')
 
 exports.test = (req, res)=>{
     try{
@@ -83,5 +86,93 @@ exports.update = async(req, res)=>{
     }catch(err){
         console.error(err)
         return res.status(500).send({message: 'Error to updated product'})
+    }
+}
+
+exports.getHistory = async(req, res)=>{
+    try{
+        let transfers = await Transfer.find({ DPIO: req.user.DPI, status: 1 });
+        let deposits = await Deposit.find({ DPIO: req.user.DPI, status: 1 });
+        let loans = await Loan.find({ DPI: req.user.DPI });
+
+        deposits = deposits.map(deposit => {
+            const parts = deposit.date.split(/[\/,: ]/);
+            const day = parts[0].padStart(2, '0');
+            const month = parts[1].padStart(2, '0');
+            const year = parts[2];
+            const hour = parts[4].padStart(2, '0');
+            const minutes = parts[5].padStart(2, '0');
+            const seconds = parts[6].padStart(2, '0');
+          
+            const formattedDate = `${year}/${month}/${day}, ${hour}:${minutes}:${seconds}`;
+          
+            return {
+              ...deposit._doc,
+              date: formattedDate
+            };
+          });
+
+        transfers = transfers.map(transfer => {
+            const parts = transfer.date.split(/[\/,: ]/);
+            const day = parts[0].padStart(2, '0');
+            const month = parts[1].padStart(2, '0');
+            const year = parts[2];
+            const hour = parts[4].padStart(2, '0');
+            const minutes = parts[5].padStart(2, '0');
+            const seconds = parts[6].padStart(2, '0');
+          
+            const formattedDate = `${year}/${month}/${day}, ${hour}:${minutes}:${seconds}`;
+          
+            return {
+              ...transfer._doc,
+              date: formattedDate
+            };
+          });    
+
+        loans = loans.map(loan => {
+            const parts = loan.date.split(/[\/,: ]/);
+            const day = parts[0].padStart(2, '0');
+            const month = parts[1].padStart(2, '0');
+            const year = parts[2];
+            const hour = parts[4].padStart(2, '0');
+            const minutes = parts[5].padStart(2, '0');
+            const seconds = parts[6].padStart(2, '0');
+          
+            const formattedDate = `${year}/${month}/${day}, ${hour}:${minutes}:${seconds}`;
+          
+            return {
+              ...loan._doc,
+              date: formattedDate
+            };
+          });                 
+
+        deposits = deposits.map(deposit => ({
+            ...deposit,
+            date: parseInt(deposit.date.replace(/[\/,: ]/g, '')),
+            color: "#70FF8B",
+            type: "Deposit"
+          }));
+
+        transfers = transfers.map(transfer => ({
+            ...transfer,
+            date: parseInt(transfer.date.replace(/[\/,: ]/g, '')),
+            color: "#27A4F2",
+            type: "Transfer"
+          })); 
+
+        loans = loans.map(loan => ({
+            ...loan,
+            date: parseInt(loan.date.replace(/[\/,: ]/g, '')),
+            color: "#F4A020",
+            type: "Loan"
+        }))
+
+        const history = deposits.concat(transfers, loans);
+        history.sort((a, b) => b.date - a.date);
+
+        return res.send({history})
+    }catch(err){
+        console.error(err)
+        return res.status(500).send({message: 'Error to getting  history'})
     }
 }
